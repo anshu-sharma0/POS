@@ -1,0 +1,40 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* light scroll */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px #f1f1f1;
+  background-color: #dbdada;
+  border-radius: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #A8A8A8;
+  border-radius: 10px;
+}
+/* dark scroll */
+[data-theme="dark"] ::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px #686868;
+  background-color: #686868;
+  border-radius: 8px;
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-thumb {
+  background: #474646;
+  border-radius: 10px;
+}
+
+/* For auto fill input in web */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    transition: background-color 5000s ease-in-out 0s;
+    -webkit-text-fill-color: #fff !important;
+}
