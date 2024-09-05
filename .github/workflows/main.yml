@@ -24,7 +24,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: production-files
-          path: ./build
+          path: ./_static
   deploy:
     name: Deploy
     needs: build
@@ -34,7 +34,7 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: production-files
-          path: ./build
+          path: ./_static
       - name: Install Surge CLI
         run: npm install -g surge
       - name: Surge Deploy
