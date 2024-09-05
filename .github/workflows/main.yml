@@ -1,0 +1,45 @@
+name: Build & Deploy
+on:
+  push:
+    branches:
+      - main
+env:
+  CI: false
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+      - name: Install dependencies
+        run: npm install
+      - name: Build Project
+        run: npm run export
+      - name: Upload production-ready build files
+        uses: actions/upload-artifact@v3
+        with:
+          name: production-files
+          path: ./build
+  deploy:
+    name: Deploy
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: production-files
+          path: ./build
+      - name: Install Surge CLI
+        run: npm install -g surge
+      - name: Surge Deploy
+        env:
+          SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
+        run: |
+          surge login --token $SURGE_TOKEN
+          surge --project ./build --domain simple-web-todolist-app.surge.sh
