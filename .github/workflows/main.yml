@@ -2,7 +2,7 @@ name: Build and Deploy to Surge
 on:
   push:
     branches:
-      - main  # Change this to your default branch
+      - main  
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
@@ -12,21 +12,17 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '16'  # Specify the Node.js version you need
+          node-version: '16' 
       - name: Install dependencies
         run: npm install
       - name: Build Expo app
         run: |
           npm install -g expo-cli
-          expo build:web  # Build your Expo app for the web
+          expo build:web  
       - name: Deploy to Surge
         run: |
           npm install -g surge
           surge login --token ${{ secrets.SURGE_TOKEN }}
-          surge --project ./web-build --domain your-app.surge.sh
+          surge --project ./web-build --domain pos-first-link2.surge.sh
         env:
           SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
-
-
-
-
