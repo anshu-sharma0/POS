@@ -14,7 +14,7 @@ import SearchIcon from "@/assets/icons/search";
 import { ThemeInput, ThemeText } from "@/custom-elements";
 
 const formSchema = z.object({
-  search: z.string(),
+  search: z.string(), 
 });
 
 interface props {
